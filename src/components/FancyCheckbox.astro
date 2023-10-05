@@ -1,0 +1,28 @@
+---
+interface Props {
+    isChecked?: boolean;
+    isHovering?: boolean;
+    backgroundColor: string;
+};
+
+const { isChecked = false, isHovering = false, backgroundColor } = Astro.props;
+
+import IconCheck from '../../public/icon-check.svg';
+---
+
+<div class="fancy-checkbox">
+    <img class="checkmark" src={IconCheck.src} alt="">
+</div>
+
+<style>
+    .fancy-checkbox {
+        background-image: linear-gradient(red, blue);
+        border-radius: 50%;
+        width: 20px;
+        aspect-ratio: 1/1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

@@ -16,8 +16,18 @@
 		<title>Frontend Mentor | Todo app</title>
 	</head>
 	<body>
+		<main>
+			<header>
+				<h1>Todo</h1>
+				<label class="theme-picker">
+					<input type="checkbox" name="theme">
+					<img src="../../icon-sun.svg" alt="">
+					<img src="../../icon-moon.svg" alt="">
+				</label>
+			</header>
 
 <style>
+		</main>
 	</body>
 </html>
 
@@ -35,5 +45,35 @@
 		background-position: center top;
 		background-repeat: no-repeat;
 		font-size: 1.6rem;
+	}
+	main {
+		width: 100%;
+		max-width: 600px;
+		margin: 75px auto 0;
+		padding-inline: 15px;
+	}
+	header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	h1 {
+		font-family: 'Josefin Sans', sans-serif;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: white;
+	}
+	input {
+		appearance: none;
+		margin: 0;
+	}
+	.theme-picker:focus-visible,
+	.theme-picker:focus {
+		outline: 1px solid red;
+	}
+	.theme-picker input:checked ~ img[src$='sun.svg'],
+	.theme-picker input:not(:checked) ~ img[src$='moon.svg'] {
+		/* By default it's Light mode */
+		display: none;
 	}
 </style>

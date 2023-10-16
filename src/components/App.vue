@@ -1,3 +1,21 @@
+<script setup>
+    import { ref, watch, computed, onMounted } from 'vue';
+    // 1: Toggle Theme
+
+    let theme = ref('light-mode');
+
+    function onToggleTheme() {
+        theme.value = theme.value === 'light-mode' ? 'dark-mode' : 'light-mode';
+    }
+
+    watch(theme, (newTheme) => {
+        document.body.dataset.theme = newTheme;
+    });
+
+    document.body.dataset.theme = theme.value;
+
+</script>
+
 <template>
     <main>
         <header>

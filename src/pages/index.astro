@@ -22,6 +22,25 @@ import App from '../components/App.vue'
 </html>
 
 <style is:global>
+	:root {
+		--primary: hsl(220, 98%, 61%);
+		--todo-background: hsl(0, 0%, 98%);
+		--todo-border: var(--checkbox);
+		--rounded-corners: .5rem;
+		--text: hsl(235, 24%, 19%);
+		--text-placeholder: hsl(233, 11%, 84%);
+		--text-completed: var(--checkbox);
+		--spacing-block: 1.5rem;
+		--spacing-inline: 2rem;
+		--checkbox: hsl(236, 33%, 92%);
+		--checkbox-gradient: linear-gradient(45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+		--background: hsl(0, 0%, 98%);
+		--footer-text: hsl(236, 9%, 61%);
+		--footer-text-hover: hsl(235, 19%, 35%);
+		--fs-normal: 1.6rem;
+		--fs-small: 1.4rem;
+	}
+
 	* {
 		box-sizing: border-box;
 	}

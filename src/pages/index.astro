@@ -18,6 +18,7 @@ import App from '../components/App.vue'
 	</head>
 	<body>
 		<App client:only />
+		<p>Drag and drop to reorder list</p>
 	</body>
 </html>
 
@@ -76,5 +77,11 @@ import App from '../components/App.vue'
 	}
 </style>
 
+<style>
+	p {
+		font-size: var(--fs-small);
+		text-align: center;
+		margin-top: calc(3 * var(--spacing-block));
+		color: var(--text-placeholder);
 	}
 </style>

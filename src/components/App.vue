@@ -23,6 +23,20 @@
     const rAddTodo = ref(null);
     const filterBy = ref('all');
 
+    const quotes = [
+        'It was not the feeling of <b>completeness</b> I so needed, but the feeling of not being empty.',
+        '<b>Emptiness</b> is a door to fullness.',
+        'In <b>emptiness</b>, there is the potential for everything.',
+        '<b>Emptiness</b> doesn\'t mean absence. It means readiness to be filled.',
+        '<b>Emptiness</b> is a good fasting place, but a terrible house guest.',
+        '<b>Emptiness</b> is a canvas to paint your thoughts.',
+        'The void holds the space for something beautiful.',
+        '<b>Empty</b> hands can hold infinite possibilities.',
+        '<b>Empty</b> spaces create room for new beginnings.',
+        'The absence of things can be a presence of peace.',
+        '<b>Emptiness</b> allows the heart to breathe freely.'
+    ];
+    
     const message = computed(() => {
         let result;
         
@@ -41,6 +55,10 @@
         return result;
     });
 
+    const emptyListMessage = computed(() => {
+        return todos.value.length === 0 ? quotes[Math.floor(Math.random() * quotes.length)] : message.value;
+    });
+    
     function onAddTodo() {
         todos.value = [...todos.value, {
             text: rAddTodo.value.value,
@@ -252,4 +270,14 @@
         }
 	}
 
+    .empty-list-message {
+        display: none;
+        margin: 0;
+        padding: calc(2 * var(--spacing-block)) var(--spacing-inline);
+        font-style: italic;
+        text-align: center;
+        color: var(--text-placeholder);
+		border-bottom: 1px solid var(--checkbox);
+        font-size: var(--fs-small);
+    }
 </style>

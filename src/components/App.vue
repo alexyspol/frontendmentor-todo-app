@@ -14,6 +14,19 @@
 
     document.body.dataset.theme = theme.value;
 
+    // 2: Create / Delete / Filter Todos
+
+    const todos = ref([]);
+    const rAddTodo = ref(null);
+    function onAddTodo() {
+        todos.value = [...todos.value, {
+            text: rAddTodo.value.value,
+            completed: false,
+            isHidden: false
+        }];
+        rAddTodo.value.value = '';
+    }
+
 </script>
 
 <template>
@@ -30,6 +43,16 @@
                     <img src="/icon-moon.svg" alt="">
                 </label>
             </div>
+
+            <div class="add-todo">
+                <span class="dummy-checkbox"></span>
+                <input
+                    type="text"
+                    placeholder="Create a new todo..."
+                    @keyup.enter="onAddTodo"
+                    ref="rAddTodo" />
+            </div>
+        </header>
     </main>
 </template>
 
@@ -78,4 +101,54 @@
 	label:focus {
 		outline: 1px solid red;
 	}
+
+    .add-todo {
+        grid-area: input;
+        padding: var(--spacing-block) var(--spacing-inline);
+        margin-top: 40px;
+        background-color: var(--todo-background);
+        border-radius: var(--rounded-corners);
+        display: flex;
+        cursor: pointer;
+
+        & input {
+            flex: 1;
+            margin-left: 10px;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            color: inherit;
+            caret-color: var(--primary);
+            background: none;
+
+            &::placeholder {
+                color: var(--text-placeholder);
+            }
+        }
+    }
+
+    .add-todo:hover .dummy-checkbox,
+    .dummy-checkbox:has(+ :focus) {
+        background-image: var(--checkbox-gradient);
+    }
+
+	.dummy-checkbox {
+		background-color: var(--checkbox);
+        border-radius: 50%;
+        width: 20px;
+        aspect-ratio: 1/1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+		&:after {
+			content: '';
+			width: 18px;
+			aspect-ratio: 1/1;
+			border-radius: 50%;
+			background-color: var(--todo-background);
+		}
+    }
 

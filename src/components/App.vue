@@ -1,6 +1,8 @@
 <script setup>
     import { ref, watch, computed, onMounted } from 'vue';
     import TodoItem from './TodoItem.vue';
+    import AppFooter from './AppFooter.vue';
+
     // 1: Toggle Theme
 
     let theme = ref('light-mode');
@@ -19,6 +21,26 @@
 
     const todos = ref([]);
     const rAddTodo = ref(null);
+    const filterBy = ref('all');
+
+    const message = computed(() => {
+        let result;
+        
+        const countCompleted = todos.value.reduce((acc, todo) => {
+            return todo.completed ? acc + 1 : acc;
+        }, 0);
+        
+        if(['all', 'active'].includes(filterBy.value)) {
+            const count = todos.value.length - countCompleted;
+            result = `${count} ${count === 1 ? 'item' : 'items'} left`;
+        }
+        else if(filterBy.value === 'completed') {
+            result = `${countCompleted}/${todos.value.length} ${countCompleted === 1 ? 'item' : 'items'} completed`;
+        }
+        
+        return result;
+    });
+
     function onAddTodo() {
         todos.value = [...todos.value, {
             text: rAddTodo.value.value,
@@ -39,6 +61,33 @@
             }
             return item;
         });
+    }
+
+    function onClearCompleted() {
+        todos.value = todos.value.filter((item) => !item.completed);
+        filterBy.value = filterBy.value;
+    }
+
+    function onFilterChange(filter) {
+        filterBy.value = filter;
+
+        if(filter === 'all') {
+            todos.value = todos.value.map(todo => {
+                return { ...todo, isHidden: false };
+            });
+        }
+        else if(filter === 'active') {
+            todos.value = todos.value.map(todo => {
+                todo.isHidden = !todo.completed ? false : true;
+                return todo;
+            });
+        }
+        else if(filter === 'completed') {
+            todos.value = todos.value.map(todo => {
+                todo.isHidden = todo.completed ? false : true;
+                return todo;
+            });
+        }
     }
 
 </script>
@@ -82,6 +131,10 @@
             <p class="empty-list-message" v-html="emptyListMessage"></p>
         </article>
 
+        <AppFooter
+            :message="message"
+            @filter-change="onFilterChange"
+            @clear-completed="onClearCompleted" />
     </main>
 </template>
 

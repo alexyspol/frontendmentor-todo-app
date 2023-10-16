@@ -1,5 +1,6 @@
 <script setup>
     import { ref, watch, computed, onMounted } from 'vue';
+    import TodoItem from './TodoItem.vue';
     // 1: Toggle Theme
 
     let theme = ref('light-mode');
@@ -25,6 +26,19 @@
             isHidden: false
         }];
         rAddTodo.value.value = '';
+    }
+
+    function onDeleteTodo(indexToRemove) {
+        todos.value = [...todos.value.slice(0, indexToRemove), ...todos.value.slice(indexToRemove + 1)];
+    }
+
+    function onCheckboxChange(indexChecked) {
+        todos.value = todos.value.map((item, i) => {
+            if(i === indexChecked) {
+                return { ...item, completed: !item.completed };
+            }
+            return item;
+        });
     }
 
 </script>
@@ -53,6 +67,21 @@
                     ref="rAddTodo" />
             </div>
         </header>
+        <article>
+            <ol>
+                <template v-for="todo, i in todos">
+                    <TodoItem
+                        v-if="!todo.isHidden"
+                        :key="i"
+                        :text="todo.text"
+                        :isChecked="todo.completed"
+                        @checkbox-change="onCheckboxChange(i)"
+                        @delete="onDeleteTodo(i)" />
+                </template>
+            </ol>
+            <p class="empty-list-message" v-html="emptyListMessage"></p>
+        </article>
+
     </main>
 </template>
 
@@ -152,3 +181,22 @@
 		}
     }
 
+	article {
+        background-color: var(--todo-background);
+        border-top-left-radius: var(--rounded-corners);
+        border-top-right-radius: var(--rounded-corners);
+        position: relative;
+        z-index: 1;
+	}
+
+	ol {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+        &:empty + .empty-list-message {
+            display: block;
+        }
+	}
+
+</style>

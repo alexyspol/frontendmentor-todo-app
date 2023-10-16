@@ -108,6 +108,19 @@
         }
     }
 
+    // 3. Local Storage
+
+    watch(todos, () => {
+        localStorage.setItem('todos', JSON.stringify(todos.value));
+    });
+
+    onMounted(() => {
+        let data = JSON.parse(localStorage.getItem('todos'));
+        todos.value = data.map((eachTodo) => {
+            eachTodo.isHidden = false;
+            return eachTodo;
+        })
+    });
 </script>
 
 <template>

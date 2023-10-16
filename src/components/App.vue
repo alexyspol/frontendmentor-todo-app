@@ -234,6 +234,7 @@
             color: inherit;
             caret-color: var(--primary);
             background: none;
+            cursor: inherit;
 
             &::placeholder {
                 color: var(--text-placeholder);

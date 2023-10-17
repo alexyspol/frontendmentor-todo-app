@@ -80,11 +80,15 @@
 
     function onClearCompleted() {
         todos.value = todos.value.filter((item) => !item.completed);
-        filterBy.value = filterBy.value;
+        filterBy.value = filterBy.value; // trigger the watch(filterBy)
     }
 
     function onFilterChange(filter) {
         filterBy.value = filter;
+    }
+
+    watch(filterBy, () => {
+        const filter = filterBy.value;
 
         if(filter === 'all') {
             todos.value = todos.value.map(todo => {
@@ -103,7 +107,7 @@
                 return todo;
             });
         }
-    }
+    });
 
     // 3. Local Storage
 

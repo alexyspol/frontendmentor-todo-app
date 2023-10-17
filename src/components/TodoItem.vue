@@ -8,7 +8,7 @@
 			<input type="checkbox" name="todo" @change="$emit('checkboxChange')" :checked="isChecked">
 
 			<div class="fancy-checkbox">
-				<img src='/icon-check.svg' alt="">
+				<img src='../../public/icon-check.svg' alt="">
 			</div>
 
 			<p>{{ text }}</p>

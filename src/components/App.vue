@@ -5,17 +5,14 @@
 
     // 1: Toggle Theme
 
-    let theme = ref('light-mode');
+    let theme = ref('');
 
     function onToggleTheme() {
-        theme.value = theme.value === 'light-mode' ? 'dark-mode' : 'light-mode';
-    }
-
-    watch(theme, (newTheme) => {
+        const newTheme = theme.value === 'light-mode' ? 'dark-mode' : 'light-mode';
+        theme.value = newTheme;
         document.body.dataset.theme = newTheme;
-    });
-
-    document.body.dataset.theme = theme.value;
+        localStorage.setItem('theme', newTheme);
+    }
 
     // 2: Create / Delete / Filter Todos
 
@@ -119,7 +116,11 @@
         todos.value = data.map((eachTodo) => {
             eachTodo.isHidden = false;
             return eachTodo;
-        })
+        });
+
+        data = localStorage.getItem('theme');
+        theme.value = data === '' ? 'light-mode' : data;
+        document.body.dataset.theme = theme.value;
     });
 </script>
 

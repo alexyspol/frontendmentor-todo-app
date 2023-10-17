@@ -133,8 +133,8 @@
                         :checked="theme === 'light-mode'"
                         @click="onToggleTheme">
 
-                    <img src="../../public/icon-sun.svg" alt="">
-                    <img src="../../public/icon-moon.svg" alt="">
+                    <img src="./icon-sun.svg" alt="">
+                    <img src="./icon-moon.svg" alt="">
                 </label>
             </div>
 

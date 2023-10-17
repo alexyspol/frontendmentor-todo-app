@@ -133,8 +133,8 @@
                         :checked="theme === 'light-mode'"
                         @click="onToggleTheme">
 
-                    <img src="./../../frontendmentor-todo-app/icon-sun.svg" alt="">
-                    <img src="./../../frontendmentor-todo-app/icon-moon.svg" alt="">
+                    <img src="/frontendmentor-todo-app/icon-sun.svg" alt="">
+                    <img src="/frontendmentor-todo-app/icon-moon.svg" alt="">
                 </label>
             </div>
 
